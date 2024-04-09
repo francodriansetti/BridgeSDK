@@ -7,14 +7,6 @@ import 'src/WebView.dart';
 /// Use this class to interact with the underlying platform and perform tasks such as getting the platform version
 /// and building a web view widget.
 class Bridgesdk {
-  /// Retrieves the platform version.
-  ///
-  /// Returns a [Future] containing a [String] representing the platform version.
-  /// Use this method to get the platform version of the device.
-  Future<String?> getPlatformVersion() async {
-    // Use BridgesdkPlatform for platform-specific implementation
-    return await BridgesdkPlatform.instance.getPlatformVersion();
-  }
 
   /// Builds a web view widget.
   ///
