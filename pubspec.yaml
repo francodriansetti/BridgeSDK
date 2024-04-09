@@ -11,6 +11,10 @@ dependencies:
   flutter:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
+  webview_flutter: ^2.0.13
+  local_auth: ^2.0.0
+  camera: ^0.10.5
+  flutter_local_notifications: ^17.0.0
 
 dev_dependencies:
   flutter_test:
