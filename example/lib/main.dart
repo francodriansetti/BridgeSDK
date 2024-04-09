@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bridgesdk/WebView.dart'; 
+import 'package:bridgesdk/WebView.dart';
 
 void main() {
   runApp(const MyApp());

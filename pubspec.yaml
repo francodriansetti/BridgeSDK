@@ -1,5 +1,5 @@
 name: bridgesdk
-description: "A new Flutter project."
+description: "Bridge SDK handle javascript events and perform native actions"
 version: 0.0.1
 homepage:
 
