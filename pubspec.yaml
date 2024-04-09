@@ -1,6 +1,6 @@
 name: bridgesdk
 description: "Bridge SDK handle javascript events and perform native actions"
-version: 0.0.1
+version: 0.0.1+0
 homepage:
 
 environment:
@@ -15,6 +15,7 @@ dependencies:
   local_auth: ^2.0.0
   camera: ^0.10.5
   flutter_local_notifications: ^17.0.0
+  gallery_saver: ^2.3.2
 
 dev_dependencies:
   flutter_test:

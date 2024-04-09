@@ -11,26 +11,6 @@ class MyWebView extends StatefulWidget {
 
 class _MyWebViewState extends State<MyWebView> {
   late WebViewController _controller;
-  late List<CameraDescription> _cameras;
-  late CameraController _cameraController;
-
-  @override
-  void initState() {
-    super.initState();
-    initializeCamera();
-  }
-
-  @override
-  void dispose() {
-    _cameraController.dispose();
-    super.dispose();
-  }
-
-  Future<void> initializeCamera() async {
-    _cameras = await availableCameras();
-    _cameraController = CameraController(_cameras[0], ResolutionPreset.medium);
-    await _cameraController.initialize();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,11 +44,18 @@ class _MyWebViewState extends State<MyWebView> {
     );
   }
 
-  void _openCamera() {
+  Future<void> _openCamera() async {
     print('Opening camera app...');
+    // Obtain a list of the available cameras on the device.
+    final cameras = await availableCameras();
+    // Get a specific camera from the list of available cameras.
+    final firstCamera = cameras.first;
+
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => CameraScreen(),
+        builder: (context) => TakePictureScreen(
+          camera: firstCamera,
+        ),
       ),
     );
   }

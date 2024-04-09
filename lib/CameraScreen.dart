@@ -1,52 +1,70 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:camera/camera.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 
-class CameraScreen extends StatefulWidget {
+class TakePictureScreen extends StatefulWidget {
+  const TakePictureScreen({
+    Key? key,
+    required this.camera,
+  }) : super(key: key);
+
+  final CameraDescription camera;
+
   @override
-  _CameraScreenState createState() => _CameraScreenState();
+  TakePictureScreenState createState() => TakePictureScreenState();
 }
 
-class _CameraScreenState extends State<CameraScreen> {
-  late CameraController _cameraController;
+class TakePictureScreenState extends State<TakePictureScreen> {
+  late CameraController _controller;
+  late Future<void> _initializeControllerFuture;
 
   @override
   void initState() {
     super.initState();
-    initializeCamera();
+    _controller = CameraController(
+      widget.camera,
+      ResolutionPreset.medium,
+    );
+    _initializeControllerFuture = _controller.initialize();
   }
 
   @override
   void dispose() {
-    _cameraController.dispose();
+    _controller.dispose();
     super.dispose();
-  }
-
-  Future<void> initializeCamera() async {
-    List<CameraDescription> cameras = await availableCameras();
-    _cameraController = CameraController(cameras[0], ResolutionPreset.medium);
-    await _cameraController.initialize();
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_cameraController == null || !_cameraController.value.isInitialized) {
-      return Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    }
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Camera Preview'),
+      appBar: AppBar(title: const Text('Take a picture')),
+      body: FutureBuilder<void>(
+        future: _initializeControllerFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return CameraPreview(_controller);
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
       ),
-      body: CameraPreview(_cameraController),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _capturePhoto,
+        child: const Icon(Icons.camera_alt),
+      ),
     );
+  }
+
+  Future<void> _capturePhoto() async {
+    try {
+      await _initializeControllerFuture;
+      final image = await _controller.takePicture();
+      await GallerySaver.saveImage(image.path);
+      print('Photo saved to camera roll: ${image.path}');
+    } catch (e) {
+      print(e);
+    }
   }
 }
