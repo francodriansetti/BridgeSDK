@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:bridgesdk/WebView.dart';
+import 'package:bridgesdk/bridgesdk.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        appBar: AppBar(
+          title: const Text('WebView Example'),
+        ),
         body: Center(
-          child: MyWebView(),
+          child: Bridgesdk().buildWebView(),
         ),
       ),
     );

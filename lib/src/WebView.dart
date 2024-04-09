@@ -2,8 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:camera/camera.dart';
-import 'package:bridgesdk/CameraScreen.dart';
+import 'package:bridgesdk/src/CameraScreen.dart';
+import 'package:bridgesdk/src/BiometricAuthenticationScreen.dart';
 import 'package:local_auth/local_auth.dart';
+
 
 class MyWebView extends StatefulWidget {
   @override
@@ -17,11 +19,8 @@ class _MyWebViewState extends State<MyWebView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('WebView Example'),
-      ),
       body: WebView(
-        initialUrl: 'https://66155b5735ba8608bb23a4b3--playful-macaron-290701.netlify.app',
+        initialUrl: 'https://6615610d69248e09b5125b1f--playful-macaron-290701.netlify.app',
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController controller) {
           _controller = controller;
@@ -63,20 +62,11 @@ class _MyWebViewState extends State<MyWebView> {
   }
 
   Future<void> _authenticateBiometric() async {
-    print('Authenticating with biometrics...');
-    bool authenticated = false;
-    try {
-      authenticated = await _localAuthentication.authenticate(
-        localizedReason: 'Authenticate to access the app',
-      );
-    } catch (e) {
-      print('Error authenticating: $e');
-    }
 
-    if (authenticated) {
-      print('Biometric authentication successful!');
-    } else {
-      print('Biometric authentication failed!');
-    }
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => BiometricAuthenticationScreen(),
+      ),
+    );
   }
 }

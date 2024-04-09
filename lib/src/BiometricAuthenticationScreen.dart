@@ -40,8 +40,6 @@ class _BiometricAuthenticationScreenState extends State<BiometricAuthenticationS
     try {
       authenticated = await _localAuthentication.authenticate(
         localizedReason: 'Authenticate to access the app',
-        useErrorDialogs: true,
-        stickyAuth: true,
       );
     } catch (e) {
       print('Error authenticating: $e');
