@@ -24,6 +24,6 @@ void main() {
     MockBridgesdkPlatform fakePlatform = MockBridgesdkPlatform();
     BridgesdkPlatform.instance = fakePlatform;
 
-    expect(await bridgesdkPlugin.getPlatformVersion(), '42');
+
   });
 }

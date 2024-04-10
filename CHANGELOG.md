@@ -1,13 +1,30 @@
-## [Unreleased]
+## [RELEASED]
 
-## [0.0.2] - YYYY-MM-DD
+## [0.0.3] - 2024-04-09
 ### Added
-- New feature or improvement 1.
-- New feature or improvement 2.
+- README
 
 ### Changed
-- Change 1.
-- Change 2.
+- None.
+- 
+### Deprecated
+- None.
+
+### Removed
+- None.
+
+### Fixed
+- None.
+
+### Security
+- None.
+- 
+## [0.0.2] - 2024-04-09
+### Added
+- UI Improvments
+
+### Changed
+- None.
 
 ### Deprecated
 - None.
@@ -16,8 +33,7 @@
 - None.
 
 ### Fixed
-- Bug fix 1.
-- Bug fix 2.
+- None.
 
 ### Security
 - None.
